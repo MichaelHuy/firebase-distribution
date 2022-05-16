@@ -46,7 +46,7 @@ jobs:
           base64 -d -i my-upload-key.keystore.b64 > android/app/my-upload-key.keystore
           echo "MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore" >> android/gradle.properties
           echo "MYAPP_UPLOAD_KEY_ALIAS=$KEYSTORE_KEY_ALIAS" >> android/gradle.properties
-          echo "MYAPP_UPLOAD_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >>android/ gradle.properties
+          echo "MYAPP_UPLOAD_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >>android/gradle.properties
           echo "MYAPP_UPLOAD_KEY_PASSWORD=$KEYSTORE_KEY_PASSWORD" >> android/gradle.properties
         env:
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
