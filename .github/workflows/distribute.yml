@@ -56,9 +56,10 @@ jobs:
 
       - name: Build Beta
         run: |
+          yarn install
           cd android && \
           fastlane beta
           cd -
-          
+
 
      
