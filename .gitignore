@@ -41,6 +41,7 @@ buck-out/
 \.buckd/
 *.keystore
 !debug.keystore
+scripts/firebase_credentials.json
 
 # fastlane
 #
