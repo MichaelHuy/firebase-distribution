@@ -65,7 +65,7 @@ jobs:
         run: |
           yarn install && \
           cd android && \
-          fastlane distribute
+          bundle exec fastlane distribute
           cd -
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
