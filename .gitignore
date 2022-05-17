@@ -42,7 +42,7 @@ buck-out/
 *.keystore
 !debug.keystore
 scripts/firebase_credentials.json
-
+android/firebase_credentials.json
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the

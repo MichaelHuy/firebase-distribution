@@ -33,7 +33,7 @@ platform :android do
   desc "Lane for distributing app using Firebase App Distributions"
   lane :distribute do
       latest_release = firebase_app_distribution_get_latest_release(
-        service_credentials_file: "firebase_credentials.json",
+        service_credentials_file: "android/firebase_credentials.json",
         app: ENV['FIREBASE_APP_ID']
       )
       increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
