@@ -31,6 +31,14 @@ Runs all the tests
 
 Submit a new Beta Build to Crashlytics Beta
 
+### android distribute
+
+```sh
+[bundle exec] fastlane android distribute
+```
+
+Lane for distributing app using Firebase App Distributions
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

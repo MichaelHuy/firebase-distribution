@@ -33,24 +33,17 @@ platform :android do
   desc "Lane for distributing app using Firebase App Distributions"
   lane :distribute do
       latest_release = firebase_app_distribution_get_latest_release(
-        service_credentials_file: "android/firebase_credentials.json",
+        service_credentials_file: "firebase_credentials.json",
         app: ENV['FIREBASE_APP_ID']
       )
       increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
-      gradle(task: "clean bundleRelease")
-      # firebase_app_distribution(
-      #     service_credentials_file: "firebase_credentials.json",
-      #     app: ENV['FIREBASE_APP_ID'],
-      #     release_notes_file: "FirebaseAppDistributionConfig/release-notes.txt",
-      #     testers_file:  "FirebaseAppDistributionConfig/emails.txt"
-      # )
+      gradle(task: "clean assembleRelease")
 
       firebase_app_distribution(
           service_credentials_file: "firebase_credentials.json",
           app: ENV['FIREBASE_APP_ID'],
           release_notes: "Your stocks first version",
-          testers: "lehuydit@gmail.com",
-          android_artifact_type: "AAB"
+          testers: "lehuydit@gmail.com"
         )
   end
 
