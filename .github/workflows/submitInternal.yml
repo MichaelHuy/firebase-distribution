@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.6'
-          
+
       - name: Install bundle
         run: |
           gem install bundler:2.3.11
@@ -66,6 +66,9 @@ jobs:
           PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
 
       - name: Distribute app to internal track 🚀
-        run: bundle exec fastlane internal
-
+        run: |
+          yarn install && \
+          cd android && \
+          bundle exec fastlane internal
+          cd -
      

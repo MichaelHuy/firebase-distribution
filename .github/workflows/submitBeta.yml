@@ -68,7 +68,7 @@ jobs:
         run: |
           yarn install && \
           cd android && \
-          bundle exec fastlane internal
+          bundle exec fastlane beta
           cd -
 
       # - name: Distribute app with 🔥 App Distribution 🚀
