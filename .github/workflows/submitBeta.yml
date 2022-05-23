@@ -1,11 +1,17 @@
-name: Submit Beta
+name: Manual submit beta
 
-on:
-  push:
-    branches: [ beta ]
-
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+        
 jobs:
-  distribute:
+  submitBeta:
     runs-on: ubuntu-latest
 
     steps:

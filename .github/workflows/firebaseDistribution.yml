@@ -1,12 +1,11 @@
-name: Distribute
+name: Firebase Distribution
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
+    branches: [ test ]
 
 jobs:
-  distribute:
+  firebaseDistribution:
     runs-on: ubuntu-latest
 
     steps:

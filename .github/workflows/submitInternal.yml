@@ -1,4 +1,4 @@
-name: Manual Submit Internal
+name: Manual submit internal
 
 on: 
   workflow_dispatch:
