@@ -68,7 +68,7 @@ platform :android do
       build_type: "Release"
     )
 
-    upload_to_play_store(track: 'internal')
+    upload_to_play_store(track: 'internal', release_status: 'draft')
 
   end
 end
