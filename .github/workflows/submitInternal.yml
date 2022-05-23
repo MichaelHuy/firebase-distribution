@@ -1,10 +1,6 @@
 name: Manual Submit Internal
 
-on:
-  workflow_dispatch:
-  # push:
-  #   branches: [ internal, beta ]
-  # pull_request:
+on: [workflow_dispatch]
 
 jobs:
   submitInternal:
