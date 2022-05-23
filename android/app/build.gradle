@@ -134,8 +134,8 @@ android {
         applicationId "com.huyle.yourstocks"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE as Integer
+        versionName VERSION_NAME
     }
     splits {
         abi {

@@ -47,4 +47,28 @@ platform :android do
         )
   end
 
+
+  desc "Lane for distributing app using Firebase App Distributions"
+  lane :internal do
+    # Get the last version code and increment it.
+    versionCode = google_play_track_version_codes(track: 'internal')
+    puts "versionCode:  '#{versionCode}'"
+    versionCode = versionCode[0] + 1
+    versionCodeWrite = 'VERSION_CODE=' + versionCode.to_s
+    versionNameWrite = 'VERSION_NAME=' + versionCode.to_s
+    File.open('../gradle.properties', 'a') {
+      |f| f.write(versionCodeWrite)
+      f.write("\n")
+      f.write(versionNameWrite)
+      f.write("\n")
+    }
+  
+    gradle(
+      task: "bundle",
+      build_type: "Release"
+    )
+
+    upload_to_play_store(track: 'internal', release_status: 'draft')
+
+  end
 end
