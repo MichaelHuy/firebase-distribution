@@ -1,12 +1,13 @@
-name: Submit Internal
+name: Manual Submit Internal
 
 on:
-  push:
-    branches: [ internal, beta ]
-  pull_request:
+  workflow_dispatch:
+  # push:
+  #   branches: [ internal, beta ]
+  # pull_request:
 
 jobs:
-  distribute:
+  submitInternal:
     runs-on: ubuntu-latest
 
     steps:
