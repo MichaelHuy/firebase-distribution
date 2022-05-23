@@ -65,13 +65,11 @@ jobs:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
 
       - name: Distribute app to Beta track 🚀
-        run: bundle exec fastlane beta
-      # - name: Create Firebase Service Credentials file
-      #   run: |
-      #     echo "$FIREBASE_CREDENTIALS" > firebase_credentials.json.b64
-      #     base64 -d -i firebase_credentials.json.b64 > android/firebase_credentials.json
-      #   env:
-      #     FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: |
+          yarn install && \
+          cd android && \
+          bundle exec fastlane internal
+          cd -
 
       # - name: Distribute app with 🔥 App Distribution 🚀
       #   run: |
