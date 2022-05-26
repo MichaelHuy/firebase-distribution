@@ -1,0 +1,74 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean bundleRelease")
+    # crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Lane for distributing app using Firebase App Distributions"
+  lane :distribute do
+      latest_release = firebase_app_distribution_get_latest_release(
+        service_credentials_file: "firebase_credentials.json",
+        app: ENV['FIREBASE_APP_ID']
+      )
+      increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
+      gradle(task: "clean assembleRelease")
+
+      firebase_app_distribution(
+          service_credentials_file: "firebase_credentials.json",
+          app: ENV['FIREBASE_APP_ID'],
+          release_notes: "Your stocks first version",
+          testers: "lehuydit@gmail.com"
+        )
+  end
+
+
+  desc "Lane for distributing app using Firebase App Distributions"
+  lane :internal do
+    # Get the last version code and increment it.
+    versionCode = google_play_track_version_codes(track: 'internal')
+    puts "versionCode:  '#{versionCode}'"
+    versionCode = versionCode[0] + 1
+    versionCodeWrite = 'VERSION_CODE=' + versionCode.to_s
+    versionNameWrite = 'VERSION_NAME=' + versionCode.to_s
+    File.open('../gradle.properties', 'a') {
+      |f| f.write(versionCodeWrite)
+      f.write("\n")
+      f.write(versionNameWrite)
+      f.write("\n")
+    }
+  
+    gradle(
+      task: "bundle",
+      build_type: "Release"
+    )
+
+    upload_to_play_store(track: 'internal')
+
+  end
+end
