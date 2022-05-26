@@ -2,7 +2,7 @@ name: Firebase Distribution
 
 on:
   push:
-    branches: [ test ]
+    branches: [ master ]
 
 jobs:
   firebaseDistribution:
