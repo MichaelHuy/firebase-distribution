@@ -77,12 +77,5 @@ jobs:
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
 
-      # - name: Build Beta
-      #   run: |
-      #     yarn install
-      #     cd android && \
-      #     fastlane beta
-      #     cd -
-
 
      
