@@ -49,19 +49,19 @@ jobs:
           path: ~/.gradle/wrapper/
           key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
 
-      - name: Configure Keystore
-        run: |
-          echo "$ANDROID_KEYSTORE_FILE" > my-upload-key.keystore.b64
-          base64 -d -i my-upload-key.keystore.b64 > android/app/my-upload-key.keystore
-          echo "MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore" >> android/gradle.properties
-          echo "MYAPP_UPLOAD_KEY_ALIAS=$KEYSTORE_KEY_ALIAS" >> android/gradle.properties
-          echo "MYAPP_UPLOAD_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >>android/gradle.properties
-          echo "MYAPP_UPLOAD_KEY_PASSWORD=$KEYSTORE_KEY_PASSWORD" >> android/gradle.properties
-        env:
-          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
-          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
-          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+      # - name: Configure Keystore
+      #   run: |
+      #     echo "$ANDROID_KEYSTORE_FILE" > my-upload-key.keystore.b64
+      #     base64 -d -i my-upload-key.keystore.b64 > android/app/my-upload-key.keystore
+      #     echo "MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore" >> android/gradle.properties
+      #     echo "MYAPP_UPLOAD_KEY_ALIAS=$KEYSTORE_KEY_ALIAS" >> android/gradle.properties
+      #     echo "MYAPP_UPLOAD_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >>android/gradle.properties
+      #     echo "MYAPP_UPLOAD_KEY_PASSWORD=$KEYSTORE_KEY_PASSWORD" >> android/gradle.properties
+      #   env:
+      #     ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+      #     KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+      #     KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+      #     KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
 
       - name: Create Google Play Config file
         run : |
@@ -72,18 +72,7 @@ jobs:
 
       - name: Distribute app to Beta track 🚀
         run: |
-          yarn install && \
           cd android && \
-          bundle exec fastlane beta
+          bundle exec fastlane promote_to_beta
           cd -
-
-      # - name: Distribute app with 🔥 App Distribution 🚀
-      #   run: |
-      #     yarn install && \
-      #     cd android && \
-      #     bundle exec fastlane distribute
-      #     cd -
-      #   env:
-      #     FIREBASE_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
-
 
