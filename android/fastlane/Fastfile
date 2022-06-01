@@ -65,9 +65,6 @@ platform :android do
     }
   
     gradle(
-      task: "clean"
-    )
-    gradle(
       task: "bundle",
       build_type: "Release"
     )
