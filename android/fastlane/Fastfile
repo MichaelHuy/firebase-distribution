@@ -64,15 +64,14 @@ platform :android do
       f.write("\n")
     }
   
-    gradle(task: "clean")
+    sh("mkdir -p metadata/android/en-US/changelogs/")
+    sh("cp ../../release_notes.txt metadata/android/en-US/changelogs/default.txt")
+    sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
 
     gradle(
       task: "bundle",
       build_type: "Release"
     )
-
-    sh("mkdir -p metadata/android/en-US/changelogs/")
-    sh("cp ../../release_notes.txt metadata/android/en-US/changelogs/default.txt")
     upload_to_play_store(
       track: 'internal',
       release_status: 'draft',
