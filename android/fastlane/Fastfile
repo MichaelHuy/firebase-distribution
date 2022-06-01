@@ -69,7 +69,7 @@ platform :android do
       build_type: "Release"
     )
 
-    mkdir -p "./metadata/android/en-US/"
+    sh(mkdir -p metadata/android/en-US/)
     sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
 
     upload_to_play_store(
