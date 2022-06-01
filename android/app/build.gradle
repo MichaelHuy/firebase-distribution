@@ -129,6 +129,9 @@ def reactNativeArchitectures() {
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
 
+def versionCodeAndroid = VERSION_CODE
+println versionCodeAndroid
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -138,8 +141,8 @@ android {
         applicationId "com.huyle.yourstocks"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.valueOf(versionCodeAndroid)
+        versionName String.valueOf(versionCodeAndroid)
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {

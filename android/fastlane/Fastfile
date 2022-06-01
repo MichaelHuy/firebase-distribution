@@ -64,6 +64,8 @@ platform :android do
       f.write("\n")
     }
   
+    gradle(task: "clean")
+    
     gradle(
       task: "bundle",
       build_type: "Release"
