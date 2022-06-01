@@ -71,7 +71,7 @@ platform :android do
       build_type: "Release"
     )
 
-    # sh("mkdir -p metadata/android/en-US/")
+    sh("mkdir -p metadata/android/en-US/")
     sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
     changelog = File.read("../../release_notes.txt")
 
