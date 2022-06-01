@@ -1,8 +1,55 @@
 981: Terms and Conditions
+
 Recent:
-123
-456
-789
-fdg
-dfgdgfsdgsdg
-ds
+897: Automatically deploy builds to Google Play
+986: Settings polish and add testers
+985: Google analytics polish.  On by default.  Toggle both Crashlytics and analytics.
+979: UI improvement - style for TextView component
+969: Add setting to turn off crashlytics and other Firebase services
+984: When no OCSP URI is available, don't use a default, just return OK
+965: Ring around PKard indicator to signal CCID vs Chip Card Status.  Sign dialog does not request PIN, when no CAC/PIV is being used.
+976: Use OCSP url from certs instead of hard coded Apple one
+978: Improved OCSP handling of expired and revoked certs
+977: Fix crash with Settings/PDF and old install
+975: Handle G+D gzipped certs
+883: Use preloaded CA certs to validate PDF signature
+966: Add Demo PDF manageable by Settings page with and without signature fields
+964: Move "Help and Feedback" menu option to top of screen
+962: Polish labels and titles
+961: Move "About Sub Rosa" from "Settings" screen to Toolbar's "More" menu
+960: Leave PKard indicator only in these screens: "Home" ""Settings"
+963: Polish "Settings" screen
+973: Interpret missing protocol in ATR as T=0
+972: Added DD2875 example PDF
+869: Read certs from both T=0 and T=1 cards
+968: Integrated CCID source for rapid CAC debugging
+954: Show expired cert error message instead of general one
+934: Added Crashlytics for remote debugging
+956: Add Build version to logging
+951: Add settings option to use Demo PDF
+953: Update date signature format
+959: Stop using legacy storage API - required by Google Play
+955: Update support email
+928: Polish logging UI / UX
+943: Create "Welcome" screen where the user can set their license type and key
+952: Recursion bug when signing with PIV
+936: Add UX feedback for signing pdf without card or soft cert.
+886: Before signing a PDF, do CA and OCSP checks on PIV/CAC/Purebred cert
+942: Create "Help & Feedback" screen to easy email reports between user and IdentiV
+940: Add extra information on "About" screen.
+941: Browser option from Hamburger menu disabled
+937: Verify button removed from Sign with PIN popup
+938: Style adjustment on Settings page
+939: "More" options removed from Settings page
+923: Import PFX/P12 certificate files (like Purebred)
+884: Use Apple OCSP URI verification for testing.
+917: Handle inserting and removing card while reader plugged in
+909: Support changing signed PDF filename
+910: Fix invalid signature when using soft certs
+916: Support signing existing signature fields
+931: Updated to Bouncy Castle libraries
+927: Imported PDF UI extensions
+918: Capture logging from PKard SDK
+829: Added logging, logging settings, send logs
+915: Fixed PDF signatures being added to wrong page
+912: Add Sub Rosa logo to left of new signature on PDF
