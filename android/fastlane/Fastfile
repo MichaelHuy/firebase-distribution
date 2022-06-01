@@ -12,6 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+opt_out_usage
 
 default_platform(:android)
 
@@ -67,7 +68,7 @@ platform :android do
       task: "bundle",
       build_type: "Release"
     )
-    
+
     mkdir -p metadata/android/en-US/
     sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
 
