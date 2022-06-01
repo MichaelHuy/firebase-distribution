@@ -86,6 +86,10 @@ platform :android do
 
   desc "promote_to_beta from internal track"
   lane :promote_to_beta do
+
+    versions = google_play_track_version_codes(track: "internal")
+    version_code = versions[0]
+
     upload_to_play_store(
       track_promote_to: 'beta',
       skip_upload_changelogs: false,
@@ -94,6 +98,7 @@ platform :android do
       skip_upload_images: true,
       skip_upload_screenshots: true,
       release_status: 'draft',
+      version_code: version_code,
       track: 'internal')
   end
 
