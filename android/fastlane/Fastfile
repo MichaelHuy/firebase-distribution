@@ -71,14 +71,14 @@ platform :android do
       build_type: "Release"
     )
 
-    sh("mkdir -p metadata/android/en-US/")
+    # sh("mkdir -p metadata/android/en-US/")
     sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
     changelog = File.read("../../release_notes.txt")
 
 
     upload_to_play_store(
       track: 'internal',
-      skip_upload_changelogs: true,
+      skip_upload_changelogs: false,
       skip_upload_apk: true,
       skip_upload_metadata: false,
       skip_upload_images: true,
