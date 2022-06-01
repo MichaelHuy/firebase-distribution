@@ -77,28 +77,20 @@ platform :android do
     upload_to_play_store(
       track: 'internal',
       release_status: 'draft',
-      skip_upload_metadata: false, 
+      skip_upload_metadata: true, 
       skip_upload_images: true, 
       skip_upload_screenshots: true, 
       skip_upload_apk: true, 
       skip_upload_changelogs: false
     )
     
-
-    # upload_to_play_store(
-    #   track: 'internal',
-    #   skip_upload_apk: true,
-    #   skip_upload_images: true,
-    #   skip_upload_screenshots: true,
-    #   release_status: 'draft',
-    # )
   end
 
   desc "promote_to_beta from internal track"
   lane :promote_to_beta do
     upload_to_play_store(
       track_promote_to: 'beta',
-      skip_upload_changelogs: true,
+      skip_upload_changelogs: false,
       skip_upload_apk: true,
       skip_upload_metadata: true,
       skip_upload_images: true,
@@ -112,7 +104,7 @@ platform :android do
     upload_to_play_store(
       track_promote_to: 'production',
       release_status: 'draft',
-      skip_upload_changelogs: true,
+      skip_upload_changelogs: false,
       skip_upload_apk: true,
       skip_upload_metadata: true,
       skip_upload_images: true,
