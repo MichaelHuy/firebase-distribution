@@ -66,7 +66,7 @@ platform :android do
   
     sh("mkdir -p metadata/android/en-US/changelogs/")
     sh("cp ../../release_notes.txt metadata/android/en-US/changelogs/default.txt")
-    sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
+    sh("cp ../../release_notes.txt metadata/android/en-US/changelogs/#{versionCode}.txt")
 
     gradle(
       task: "bundle",
