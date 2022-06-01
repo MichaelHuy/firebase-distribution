@@ -141,8 +141,8 @@ android {
         applicationId "com.huyle.yourstocks"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode Integer.valueOf(versionCodeAndroid)
-        versionName String.valueOf(versionCodeAndroid)
+        versionCode versionCodeAndroid ? Integer.valueOf(versionCodeAndroid): 1
+        versionName versionCodeAndroid ? String.valueOf(versionCodeAndroid) : "1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {

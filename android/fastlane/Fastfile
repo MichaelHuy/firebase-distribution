@@ -73,6 +73,8 @@ platform :android do
 
     sh("mkdir -p metadata/android/en-US/")
     sh("cp ../../release_notes.txt metadata/android/en-US/#{versionCode}.txt")
+    changelog = File.read("../../release_notes.txt")
+
 
     upload_to_play_store(
       track: 'internal',
