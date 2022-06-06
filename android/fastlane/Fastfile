@@ -74,7 +74,7 @@ platform :android do
     )
     upload_to_play_store(
       track: 'internal',
-      release_status: 'draft',
+      # release_status: 'draft',
       skip_upload_metadata: false,
       skip_upload_changelogs: false,
       skip_upload_images: true, 
@@ -91,7 +91,7 @@ platform :android do
     version_code = versions[0]
 
     upload_to_play_store(
-      track_promote_to: 'beta',
+      track_promote_to: 'alpha',
       skip_upload_changelogs: false,
       skip_upload_apk: true,
       skip_upload_metadata: false,
@@ -104,6 +104,9 @@ platform :android do
 
   desc "promote_to_production from beta track"
   lane :promote_to_production do
+    versions = google_play_track_version_codes(track: "alpha")
+    version_code = versions[0]
+
     upload_to_play_store(
       track_promote_to: 'production',
       release_status: 'draft',
@@ -112,6 +115,6 @@ platform :android do
       skip_upload_metadata: false,
       skip_upload_images: true,
       skip_upload_screenshots: true,
-      track: 'beta')
+      track: 'alpha')
   end
 end
