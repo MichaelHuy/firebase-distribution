@@ -17,14 +17,13 @@ jobs:
         with:
           path: |
             node-modules
-          key: ${{ runner.os }}-pods-${{ hashFiles('iOS/Enterphone/Podfile.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-pods-
+            ${{ runner.os }}-node-modules-
 
       - name: Yarn install
         run: |
           yarn install
-          cd -
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
 
       - name: Extract Branch Name
@@ -45,7 +44,7 @@ jobs:
         with:
           path: |
             node-modules
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-modules
 
