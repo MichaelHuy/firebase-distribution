@@ -7,52 +7,76 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # cache pod install to save time
-      - name: Restore Pods cache
-        uses: actions/cache@v3
-        id: cache-node-modules
+
+
+      - uses: madhead/read-java-properties@latest
+        id: all
         with:
-          path: |
-            node-modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
+          file: ./android/gradle.properties
+          all: true
 
-      - name: Yarn install
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
+          
+      - name: Update app version for pull request
+        if: contains(${{ steps.extract_branch.outputs.branch }}, 'merge')
         run: |
-          yarn install
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+         echo $PR_NUMBER
+         echo ${{ steps.extract_branch.outputs.branch }}
+         echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER" >> ./android/gradle.properties
+        env:
+          PR_NUMBER: ${{ github.event.number }}
 
-      - name: Extract Branch Name
-        run: |
-          echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
 
-  releaseBeta:
-    needs: build
-    runs-on: macos-latest
-    environment: "prod"
-
-    steps:
-      - uses: actions/checkout@v3
       # cache pod install to save time
-      - name: Restore Pods cache
-        uses: actions/cache@v3
-        id: cache-node-modules
-        with:
-          path: |
-            node-modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules
+      # - name: Restore Pods cache
+      #   uses: actions/cache@v3
+      #   id: cache-node-modules
+      #   with:
+      #     path: |
+      #       node-modules
+      #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-modules-
 
-      - name: Yarn install
-        run: |
-          yarn install
-          cd -
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      # - name: Yarn install
+      #   run: |
+      #     yarn install
+      #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
+
+      # - name: Extract Branch Name
+      #   run: |
+      #     echo "BRANCH=$(echo ${GITHUB_REF##*/})" >> $GITHUB_ENV
+
+  # releaseBeta:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   environment: "prod"
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     # cache pod install to save time
+  #     - name: Restore Pods cache
+  #       uses: actions/cache@v3
+  #       id: cache-node-modules
+  #       with:
+  #         path: |
+  #           node-modules
+  #         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-modules
+
+  #     - name: Yarn install
+  #       run: |
+  #         yarn install
+  #         cd -
+  #       if: steps.cache-node-modules.outputs.cache-hit != 'true'
 
 
 # jobs:
