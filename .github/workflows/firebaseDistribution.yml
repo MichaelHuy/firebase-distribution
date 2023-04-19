@@ -25,11 +25,11 @@ jobs:
         id: extract_branch
           
       - name: Update app version for pull request
-        if: contains(${{ steps.extract_branch.outputs.branch }}, 'merge')
         run: |
          echo $PR_NUMBER
          echo ${{ steps.extract_branch.outputs.branch }}
          echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER" >> ./android/gradle.properties
+        if: contains(${{ steps.extract_branch.outputs.branch }}, 'merge')
         env:
           PR_NUMBER: ${{ github.event.number }}
 
