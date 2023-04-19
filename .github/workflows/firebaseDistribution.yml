@@ -18,18 +18,12 @@ jobs:
           file: ./android/gradle.properties
           all: true
 
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
-        id: extract_branch
-          
       - name: Update app version for pull request
+        if: github.event_name == 'pull_request'
+        shell: bash
         run: |
          echo $PR_NUMBER
-         echo ${{ steps.extract_branch.outputs.branch }}
          echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER" >> ./android/gradle.properties
-        if: contains(${{ steps.extract_branch.outputs.branch }}, 'main')
         env:
           PR_NUMBER: ${{ github.event.number }}
 
