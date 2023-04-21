@@ -20,14 +20,22 @@ jobs:
           file: ./android/gradle.properties
           all: true
 
+      - name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+
       - name: Update app version for pull request
         if: github.event_name == 'pull_request'
         shell: bash
         run: |
          echo $PR_NUMBER
-         echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER" >> ./android/gradle.properties
+         echo $SHORT_SHA
+         echo echo ${GITHUB_SHA::7}
+         echo $GITHUB_COMMIT_ID
+         echo ${GITHUB_COMMIT_ID::7}
+         echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER".${GITHUB_SHA::7} >> ./android/gradle.properties
         env:
           PR_NUMBER: ${{ github.event.number }}
+          GITHUB_COMMIT_ID: ${{ github.event.pull_request.head.sha }}
 
 
       # cache pod install to save time
