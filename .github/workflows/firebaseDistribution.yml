@@ -29,6 +29,7 @@ jobs:
         run: |
          echo $PR_NUMBER
          echo $SHORT_SHA
+         echo echo ${GITHUB_SHA::7}
          echo "VERSION_NAME_ANDROID=${{ steps.all.outputs.VERSION_NAME_ANDROID }}.$PR_NUMBER" >> ./android/gradle.properties
         env:
           PR_NUMBER: ${{ github.event.number }}
